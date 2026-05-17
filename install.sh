@@ -17,7 +17,7 @@ esac
 
 BINARY_NAME="meowthread-daemon-${OS}-${ARCH}"
 # REPLACE THIS URL ONCE YOU PUSH TO GITHUB
-DOWNLOAD_URL="https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/meowthread-daemon-releases/main/${BINARY_NAME}"
+DOWNLOAD_URL="https://raw.githubusercontent.com/Ramraika-s/meowthread-daemon-releases/main/${BINARY_NAME}"
 INSTALL_DIR="/usr/local/bin"
 EXECUTABLE_NAME="meowthread-daemon"
 

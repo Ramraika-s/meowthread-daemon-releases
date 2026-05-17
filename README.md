@@ -6,18 +6,16 @@ The MeowThread Daemon connects your local machine's terminal directly to the Meo
 
 ## Installation
 
-> **Note**: You will need to replace `YOUR_GITHUB_USERNAME` in the URLs with your actual GitHub username once you push this folder to its own public repository!
-
 ### Mac / Linux
 Open your terminal and run the following command:
 ```bash
-curl -sSL https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/meowthread-daemon-releases/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/Ramraika-s/meowthread-daemon-releases/main/install.sh | bash
 ```
 
 ### Windows
 Open PowerShell as Administrator and run:
 ```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/meowthread-daemon-releases/main/install.ps1" -OutFile "install.ps1"; .\install.ps1
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Ramraika-s/meowthread-daemon-releases/main/install.ps1" -OutFile "install.ps1"; .\install.ps1
 ```
 
 ## Manual Installation

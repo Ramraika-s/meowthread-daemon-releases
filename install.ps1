@@ -12,7 +12,7 @@ if ($Arch -eq 9) {
 
 $BinaryName = "meowthread-daemon-windows-$ArchStr.exe"
 # REPLACE THIS URL ONCE YOU PUSH TO GITHUB
-$DownloadUrl = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/meowthread-daemon-releases/main/$BinaryName"
+$DownloadUrl = "https://raw.githubusercontent.com/Ramraika-s/meowthread-daemon-releases/main/$BinaryName"
 $InstallDir = "$env:ProgramFiles\MeowThread"
 $ExecutablePath = "$InstallDir\meowthread-daemon.exe"
 

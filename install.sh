@@ -84,12 +84,12 @@ fi
 
 # 5. Service Configuration Prompts
 echo ""
-read -p "Would you like to install the daemon as a background service? [Y/n] " INSTALL_SVC
+read -p "Would you like to install the daemon as a background service? [Y/n] " INSTALL_SVC < /dev/tty
 if [[ "$INSTALL_SVC" =~ ^([yY][eE][sS]|[yY]|)$ ]]; then
     "$INSTALL_DIR/$BINARY_NAME" --install
     
     echo ""
-    read -p "Would you like the daemon to automatically start when your system boots? [Y/n] " AUTO_BOOT
+    read -p "Would you like the daemon to automatically start when your system boots? [Y/n] " AUTO_BOOT < /dev/tty
     if [[ "$AUTO_BOOT" =~ ^([yY][eE][sS]|[yY]|)$ ]]; then
         if [ "$OS" == "linux" ] && command -v loginctl >/dev/null; then
             loginctl enable-linger "$USER"

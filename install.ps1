@@ -2,19 +2,19 @@
 
 Write-Host "🐱 Welcome to the MeowThread Daemon Installer!"
 
-$Arch = (Get-WmiObject Win32_Processor).Architecture
-if ($Arch -eq 9) {
+$Arch = $env:PROCESSOR_ARCHITECTURE
+if ($Arch -eq "AMD64") {
     $ArchStr = "amd64"
 } else {
-    Write-Host "Unsupported architecture. Currently only x64 (amd64) is supported on Windows."
+    Write-Host "Unsupported architecture: $Arch. Currently only x64 (amd64) is supported on Windows."
     exit
 }
 
 $BinaryName = "meowthread-daemon-windows-$ArchStr.exe"
 $RepoPath = "Ramraika-s/meowthread-daemon-releases"
 $ApiUrl = "https://api.github.com/repos/$RepoPath/releases/latest"
-$InstallDir = "$env:ProgramFiles\MeowThread"
-$ExecutablePath = "$InstallDir\meowthread-daemon.exe"
+$InstallDir = "$env:USERPROFILE\.meowthread\bin"
+$ExecutablePath = "$InstallDir\meowthread.exe"
 
 Write-Host "Querying GitHub for latest release..."
 try {
@@ -38,10 +38,10 @@ if (-not (Test-Path -Path $InstallDir)) {
 Invoke-WebRequest -Uri $DownloadUrl -OutFile $ExecutablePath
 
 # Add to PATH if not already present
-$CurrentPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
+$CurrentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
 if ($CurrentPath -notmatch [regex]::Escape($InstallDir)) {
-    Write-Host "Adding $InstallDir to system PATH..."
-    [Environment]::SetEnvironmentVariable("PATH", $CurrentPath + ";$InstallDir", "Machine")
+    Write-Host "Adding $InstallDir to user PATH..."
+    [Environment]::SetEnvironmentVariable("PATH", $CurrentPath + ";$InstallDir", "User")
 }
 
 Write-Host ""

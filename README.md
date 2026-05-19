@@ -56,9 +56,44 @@ The daemon securely queries the GitHub API, downloads the latest verified binary
 
 ## 🔒 Security & Verification
 
-MeowThread enforces a strict zero-trust, end-to-end encryption model. The daemon never runs arbitrary commands sent over the network unless they are explicitly whitelisted in your `~/.signal-engine/config.toml` file.
+MeowThread enforces a strict zero-trust, end-to-end encryption model. The daemon never runs arbitrary commands sent over the network unless they are explicitly whitelisted in your `~/.meowthread-engine/config.toml` or permitted in `~/.meowthread-engine/permissions.toml`.
 
 You can manually verify the integrity of the binaries against the release checksums:
 ```bash
 sha256sum -c checksums.txt
 ```
+
+---
+
+## 🔑 Elevated Execution & Sudo Configuration
+
+For administrative commands (like system upgrades or service restarts), the daemon supports **Passwordless Elevated Execution**. This allows authorized actions to run safely without exposing or storing your password.
+
+We recommend two security options depending on your environment:
+
+### Option A: Power User Blanket Control (Easiest)
+Allows the daemon to run *any* elevated command instantly after you click approve in the E2EE Web UI.
+* Add this line to your sudoers file:
+  ```sudoers
+  <username> ALL=(ALL) NOPASSWD: ALL
+  ```
+  *(Replace `<username>` with your system's username).*
+
+### Option B: Predefined Whitelist (Max Security)
+Restricts the daemon to *only* a specific list of approved system binaries.
+* Add this line to your sudoers file:
+  ```sudoers
+  <username> ALL=(ALL) NOPASSWD: /usr/bin/dnf, /usr/bin/systemctl, /usr/bin/apt-get
+  ```
+
+---
+
+### ⚠️ CRITICAL SAFETY WARNING
+> [!CAUTION]
+> **Never** edit sudoers files directly using standard text editors (such as `nano` or `vim`). A single typo can completely break the `sudo` subsystem, locking all administrators out of system privilege escalation.
+> 
+> **Always** run this command to safely edit and validate the rules:
+> ```bash
+> sudo visudo -f /etc/sudoers.d/meowthread
+> ```
+> This automatically checks file syntax before writing and aborts if errors are found, protecting your system.
